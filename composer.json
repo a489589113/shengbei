@@ -1,0 +1,36 @@
+{
+  "name": "crius/shengbei-sdk",
+  "description": "crius shengbei sdk",
+  "type": "library",
+  "require": {
+    "php": ">=7.0",
+    "php-packages/structured-response": "^0.0.2",
+    "php-packages/verification": "v0.0.*"
+  },
+  "license": "MIT",
+  "keywords": [
+    "shengbei","smy"
+  ],
+  "authors": [
+    {
+      "name": "wanwenhui",
+      "email": "wenhui.wan@haoqitech.com.cn"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "classmap": [
+      "src/"
+    ],
+    "psr-0": {
+      "Crius\\Meizu\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Crius\\Smy\\Providers\\CriusSmyServiceProvider"
+      ]
+    }
+  }
+}
