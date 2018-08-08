@@ -6,7 +6,7 @@
  * Time: 15:41
  */
 
-namespace Crius\Smy\Controllers\Smy;
+namespace Crius\Smy\Controllers;
 
 
 use Crius\Smy\Helpers\CardHelper;

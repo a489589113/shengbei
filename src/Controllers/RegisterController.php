@@ -6,7 +6,7 @@
  * Time: 9:54
  */
 
-namespace Crius\Smy\Controllers\Smy;
+namespace Crius\Smy\Controllers;
 
 use Crius\Smy\Helpers\RegisterHelper;
 use Crius\Smy\Rules\IdNumber;

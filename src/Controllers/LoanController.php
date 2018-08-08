@@ -6,7 +6,7 @@
  * Time: 16:55
  */
 
-namespace Crius\Smy\Controllers\Smy;
+namespace Crius\Smy\Controllers;
 
 
 use Crius\Smy\Helpers\LoanHelper;

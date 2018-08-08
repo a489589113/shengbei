@@ -33,19 +33,5 @@
         "Crius\\Smy\\Providers\\CriusSmyServiceProvider"
       ]
     }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packagist.phpcomposer.com"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/3930615/php-packages-structured-response.git"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/3930615/php-packages-verification.git"
-    }
-  ]
+  }
 }

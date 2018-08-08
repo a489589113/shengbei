@@ -6,7 +6,7 @@
  * Time: 17:38
  */
 
-namespace Crius\Smy\Controllers\Smy;
+namespace Crius\Smy\Controllers;
 
 
 use Crius\Smy\Helpers\RepaymentHelper;

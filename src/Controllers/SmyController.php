@@ -6,7 +6,7 @@
  * Time: 16:24
  */
 
-namespace Crius\Smy\Controllers\Smy;
+namespace Crius\Smy\Controllers;
 
 
 use App\Exceptions\ValidateException;

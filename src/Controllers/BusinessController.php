@@ -1,6 +1,6 @@
 <?php
 
-namespace Crius\Smy\Controllers\Smy;
+namespace Crius\Smy\Controllers;
 
 
 use Illuminate\Http\Request;
