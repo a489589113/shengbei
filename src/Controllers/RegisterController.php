@@ -131,8 +131,8 @@ class RegisterController extends SmyController
             'issueAgency' => 'required',
             'issueDate' => 'required',
             'expireDate' => 'required',
-            'frontImage' => 'required',
-            'backImage' => 'required',
+            'frontImage' => 'required|image',
+            'backImage' => 'required|image',
             'isSupplement' => 'nullable|boolean',
         ], [], [
             'name' => '姓名',
@@ -158,10 +158,16 @@ class RegisterController extends SmyController
     public function subLivingInfo(Request $request)
     {
         $this->validateApi($request, [
-            'livingImageList' => 'required|json',
+            'image_best' => 'required|image',
+            'image_action1' => 'required|image',
+            'image_action2' => 'required|image',
+            'image_action3' => 'required|image',
             'isSupplement' => 'nullable|boolean',
         ], [], [
-            'livingImageList' => '活体图片',
+            'image_best' => '正面照',
+            'image_action1' => '动作照1',
+            'image_action2' => '动作照2',
+            'image_action3' => '动作照3',
             'isSupplement' => '补件',
         ]);
         return $this->helper->subLivingInfo($request);

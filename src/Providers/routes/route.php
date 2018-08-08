@@ -81,4 +81,4 @@ Route::group(['prefix' => 'api/smy'],function () use ($namespace){
         /** 提交还款 */
         Route::post('submit', ['uses' => $namespace.'RepaymentController@repayment']);
     });
-})->middleware('auth');
+});

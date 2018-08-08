@@ -195,15 +195,15 @@ class RegisterHelper extends SmyHelper
     {
 
         try {
-            $livingImageList = $request->get('livingImageList');
-            $livingImageList = json_decode($livingImageList, true);
-            $liveArr = [];
-            array_push($liveArr, $livingImageList['image_best']);
-            array_push($liveArr, $livingImageList['image_action1']);
-            array_push($liveArr, $livingImageList['image_action2']);
-            array_push($liveArr, $livingImageList['image_action3']);
-            $postField['livingInfo']['livingImageList'] = $liveArr;
-            $postField['isSupplement'] = $request->get('isSupplement') ? true : false;
+//            $livingImageList = $request->get('livingImageList');
+//            $livingImageList = json_decode($livingImageList, true);
+//            $liveArr = [];
+//            array_push($liveArr, $livingImageList['image_best']);
+//            array_push($liveArr, $livingImageList['image_action1']);
+//            array_push($liveArr, $livingImageList['image_action2']);
+//            array_push($liveArr, $livingImageList['image_action3']);
+//            $postField['livingInfo']['livingImageList'] = $liveArr;
+//            $postField['isSupplement'] = $request->get('isSupplement') ? true : false;
 //            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
             $response = null;
         } catch (Exception $exception) {
