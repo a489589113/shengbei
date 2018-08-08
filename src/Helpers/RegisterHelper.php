@@ -33,7 +33,7 @@ class RegisterHelper extends SmyHelper
     public function register(Request $request)
     {
         $addField = $request->only('mobilePhoneNo');
-        $addField['openId'] = $this->getOpenId($request);
+        $addField['openId'] = self::getOpenId($request);
         $postField = $request->only('mobilePhoneNo');
         try {
 //            $response = $this->manage->userRegister($this->addHeaderPostField($request,$postField));
@@ -54,7 +54,7 @@ class RegisterHelper extends SmyHelper
     public function registerByDynamicCode(Request $request)
     {
         $addField = $request->only('mobilePhoneNo');
-        $addField['openId'] = $this->getOpenId($request);
+        $addField['openId'] = self::getOpenId($request);
         $postField = $request->only('mobilePhoneNo', 'dynamicCode');
         try {
 //            $response = $this->manage->registerByDynamicCode($this->addHeaderPostField($request, $postField));
@@ -74,7 +74,7 @@ class RegisterHelper extends SmyHelper
      */
     public function userInfo(Request $request)
     {
-        $openId = $this->getOpenId($request);
+        $openId = self::getOpenId($request);
         $record = $this->exist($openId);
         try {
 //            if (isset($record->mobilePhoneNo)&&$record->mobilePhoneNo){

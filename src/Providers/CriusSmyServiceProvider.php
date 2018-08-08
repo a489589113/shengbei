@@ -17,10 +17,12 @@ class CriusSmyServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/routes/route.php');
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->publishes([
+            __DIR__ . '/assets' => public_path('vendor/smy'),
+        ],'public');
+        $this->publishes([
             __DIR__ . '/config/smyConfig.php' => config_path('smyConfig.php'),
             __DIR__ . '/config/smySupportBank.php' => config_path('smySupportBank.php'),
-            __DIR__ . '/assets' => public_path('vendor/smy'),
-        ]);
+        ],'config');
         $this->mergeConfigFrom(__DIR__ . '/config/smyConfig.php', 'smyConfig');
         $this->mergeConfigFrom(__DIR__ . '/config/smySupportBank.php', 'smySupportBank');
     }

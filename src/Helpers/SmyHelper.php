@@ -71,7 +71,7 @@ class SmyHelper
 
     protected function getUser(Request $request)
     {
-        $record = UserOpenId::where('openId', $this->getOpenId($request))->first();
+        $record = UserOpenId::where('openId', self::getOpenId($request))->first();
         return $record->mobilePhoneNo ?? null;
     }
 
@@ -98,7 +98,7 @@ class SmyHelper
         $this->response = ['retcode' => 0, 'info' => [], 'data' => []];
     }
 
-    public function getOpenId(Request $request)
+    public static function getOpenId(Request $request)
     {
         return 'mcfWhcyHyx2lY55rh6myIo5_hov2xwpu21fWxGiLEFA';
 //        return $request->header('OpenId');

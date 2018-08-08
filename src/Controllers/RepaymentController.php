@@ -18,6 +18,7 @@ class RepaymentController extends SmyController
 
     public function __construct(RepaymentHelper $helper)
     {
+        parent::__construct();
         $this->helper = $helper;
     }
 

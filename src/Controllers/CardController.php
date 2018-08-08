@@ -20,6 +20,7 @@ class CardController extends SmyController
 
     public function __construct(CardHelper $helper)
     {
+        parent::__construct();
         $this->helper = $helper;
     }
 

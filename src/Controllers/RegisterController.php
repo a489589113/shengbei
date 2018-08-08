@@ -19,6 +19,7 @@ class RegisterController extends SmyController
 
     public function __construct(RegisterHelper $helper)
     {
+        parent::__construct();
         $this->helper = $helper;
     }
 

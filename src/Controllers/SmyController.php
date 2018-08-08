@@ -11,10 +11,16 @@ namespace Crius\Smy\Controllers;
 
 use App\Exceptions\ValidateException;
 use App\Http\Controllers\Controller;
+use Crius\Smy\Middleware\SmyMiddleware;
 use Illuminate\Http\Request;
 
 class SmyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(SmyMiddleware::class);
+    }
+
     public function validateApi(Request $request, array $rules,
                                 array $messages = [], array $customAttributes = [])
     {

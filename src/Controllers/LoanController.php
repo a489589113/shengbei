@@ -18,6 +18,7 @@ class LoanController extends SmyController
 
     public function __construct(LoanHelper $helper)
     {
+        parent::__construct();
         $this->helper = $helper;
     }
 

@@ -16,6 +16,7 @@ class BusinessController extends SmyController
 
     public function __construct(BusinessHelper $helper)
     {
+        parent::__construct();
         $this->helper = $helper;
     }
 

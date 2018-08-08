@@ -16,6 +16,7 @@ class IdentityController extends SmyController
 
     public function __construct(IdentityHelper $helper)
     {
+        parent::__construct();
         $this->helper = $helper;
     }
 
