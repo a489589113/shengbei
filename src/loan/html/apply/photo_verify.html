@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="render" content="webkit" />
+  <title>贷款申请-图片上传</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/photo_verify_c59dcdbc.css" rel="stylesheet"></head>
+
+<body>
+  <div v-cloak id='wrap'>
+    <div class="photo">
+      <input accept="image/*" capture="camera" class="select-file" type="file" v-on:change='selectFile'>
+      <img :src="photo_src" width="100%">
+      <div class="photo-ft">
+        <span class="upload-txt">{{upload_txt}}</span>
+      </div>
+    </div>
+
+    <div class="photo-demo">
+      <img :src="demo_src" width="77">
+      <dl>
+        <dt>示例</dt>
+        <dd>请在明亮的灯光下完成拍照。取下帽子、眼镜等配饰，保持脸部清晰且完整露出。</dd>
+      </dl>
+    </div>
+    <div class="box-switch">
+      <span class="ico-switch" v-on:click="fnswitch"></span><p v-on:click="fnswitch">切换至动态模式</p>
+    </div>
+    <foot-btn btn-txt='下一步' :is-on='btn_status' v-on:click.native="upload"></foot-btn>
+  </div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/photo_verify_f23cf24f.js"></script></body>
+</html>

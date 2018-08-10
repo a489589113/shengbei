@@ -45,7 +45,6 @@ class RegisterController extends SmyController
     {
         $this->validateApi($request, [
             'mobilePhoneNo' => ['required', new Mobile()],
-            'openId' => 'required',
             'dynamicCode' => 'required'
         ], [], [
             'mobilePhoneNo' => '手机号码',
@@ -62,7 +61,6 @@ class RegisterController extends SmyController
      */
     public function userInfo(Request $request)
     {
-        $this->validateApi($request, ['openId' => ['required']]);
         return $this->helper->userInfo($request);
     }
 
@@ -80,16 +78,15 @@ class RegisterController extends SmyController
             'addressProvince' => 'required',
             'addressCity' => 'required',
             'addressDistrict' => 'required',
-            'gpsAddress' => 'required',
-            'gpsProvince' => 'required',
-            'gpsCity' => 'required',
-            'gpsDistrict' => 'required',
+            'gpsAddress' => '',
+            'gpsProvince' => '',
+            'gpsCity' => '',
+            'gpsDistrict' => '',
             'email' => 'required',
             'marryStatus' => 'required|in:0,1',
             'contactName' => 'required',
             'contactMobilePhoneNo' => 'required',
-            'fullContactInfoList' => 'required|array',
-            'appInfoList' => 'nullable|array',
+            'fullContactInfoList' => 'required|json',
             'isSupplement' => 'nullable|boolean',
             'haveCreditcard' => 'required|in:0,1',
             'educationLevel' => 'required|in:1,5,10,15,20,30,40',
@@ -108,7 +105,6 @@ class RegisterController extends SmyController
             'contactName' => '常用联系人',
             'contactMobilePhoneNo' => '常用联系人电话',
             'fullContactInfoList' => '通讯录记录',
-            'appInfoList' => '安装的应用',
             'isSupplement' => '补件',
             'haveCreditcard' => '学历',
             'educationLevel' => '是否有信用卡',
@@ -130,7 +126,7 @@ class RegisterController extends SmyController
             'idNo' => ['required', new IdNumber()],
 //            'address' => 'required',
             'issueAgency' => 'required',
-            'issueDate' => 'required',
+            'issueDate' => 'required|date',
             'expireDate' => 'required',
             'frontImage' => 'required|image',
             'backImage' => 'required|image',
@@ -147,6 +143,13 @@ class RegisterController extends SmyController
             'backImage' => '身份证反面照',
             'isSupplement' => '补件',
         ]);
+        if ($request->get('expireDate') != '000000') {
+            $this->validateApi($request, [
+                'expireDate' => 'required|date',
+            ], [], [
+                'expireDate' => '到期日',
+            ]);
+        }
         return $this->helper->subIdInfo($request);
     }
 

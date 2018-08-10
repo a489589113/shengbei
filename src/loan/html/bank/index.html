@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<meta name="render" content="webkit" />
+<title>银行卡验证</title>
+<link href="http://10.6.9.244:8056/loan/css/bank/index_5ea8027e.css" rel="stylesheet"></head>
+
+<body>
+	<div v-cloak id='wrap'>
+		<div class="inner">
+			<item mark-subject="银行卡" :submark-subject="bankinfor"></item>
+			<item mark-subject="手机号" :submark-subject="phoneinfor"></item>
+			<div class="vcode">
+				<div class="vcode-mark">
+					<input maxlength="6" v-model="code.value" disabled v-on:input="input" placeholder="请输入验证码" class="vcode-inp" type="tel" name="vcode" id="j-inp">
+				</div>
+				<div class="vcode-submark">
+					<div>|</div>
+					<p class="vcode-second" v-show="!code.show_getCode">{{code.second}}秒后重发</p>
+					<div v-show="code.show_getCode" class="vcode-send" v-on:click="getCode">{{code.btn_text}}</div>
+				</div>
+			</div>
+		</div>
+		<foot-btn btn-txt="确定" :is-on="btn_status" v-on:next="submit"></foot-btn>
+	</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/bank/index_6ad163be.js"></script></body>
+</html>

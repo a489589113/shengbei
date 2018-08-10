@@ -9,8 +9,9 @@
 namespace Crius\Smy\Controllers;
 
 
-use App\Exceptions\ValidateException;
 use App\Http\Controllers\Controller;
+use Crius\Smy\Exceptions\ValidateException;
+use Crius\Smy\Middleware\EnableCrossRequestMiddleware;
 use Crius\Smy\Middleware\SmyMiddleware;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class SmyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(SmyMiddleware::class);
+        $this->middleware([EnableCrossRequestMiddleware::class,SmyMiddleware::class]);
     }
 
     public function validateApi(Request $request, array $rules,

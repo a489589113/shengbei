@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="render" content="webkit" />
+  <title>贷款申请首页</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/index_721c1d84.css" rel="stylesheet"></head>
+
+<body>
+  <div v-cloak id='wrap'>
+    <div class="content">
+      <item mark-subject='姓名'>
+          <input class="vue-item-inp" v-on:focus="focusEvent" v-on:blur="blurEvent" maxlength="15" v-model="user_val" v-on:input="inputEvent" placeholder="请输入姓名" slot="submark" type="text" name="user" id="">
+      </item>
+      <item mark-subject='身份证'>
+          <input class="vue-item-inp" v-on:focus="focusEvent" v-on:blur="blurEvent" maxlength="18" v-model="id_val" v-on:input="inputEvent" placeholder="请输入身份证" slot="submark" type="text" name="id" id="">
+      </item>
+      <item mark-subject='手机号'>
+          <input class="vue-item-inp" v-on:focus="focusEvent" v-on:blur="blurEvent" v-model="phone_val"  maxlength="11" v-on:input="inputEvent" placeholder="请输入手机号" slot="submark" type="tel" name="phone" id="">
+      </item>
+      <item v-if="code_show">
+        <vcode v-on:showcode="getcode" :value="vcode_val" :bizcontent="bizcontent"></vcode>
+      </item>
+      <div class="error-tips">{{error_tips}}</div>
+    </div>
+    <agreement :array="agreements" v-on:next="areement"></agreement>
+    <foot-btn v-on:next="next" btn-txt='下一步' :is-on='btn_status'></foot-btn>
+  </div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/index_9f4a4e26.js"></script></body>
+</html>

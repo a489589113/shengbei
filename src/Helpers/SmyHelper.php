@@ -9,6 +9,7 @@
 namespace Crius\Smy\Helpers;
 
 
+use Crius\Smy\Jobs\SendAppListToShengBei;
 use Crius\Smy\Manager\SmyManager;
 use Crius\Smy\Models\UserOpenId;
 use Illuminate\Http\Request;
@@ -44,15 +45,16 @@ class SmyHelper
         if ($record) {
             return $record->id;
         }
-        return null;
+        return 1;
     }
 
     protected function getEnvironment(Request $request)
     {
         try {
             //@todo dummy环境信息
-            return ['deviceUniqueId' => 'E4E6D232-41E0-4335-A879-F583F1320AC6'];
-//            return base64_decode(json_decode($request->header('Environment')));
+//            return ['deviceUniqueId' => 'E4E6D232-41E0-4335-A879-F583F1320AC6'];
+//            return ['deviceUniqueId' => '0'];
+            return json_decode(base64_decode($request->header('Environment')),true);
         } catch (Exception $exception) {
             throw new Exception('环境信息格式错误');
         }
@@ -62,8 +64,8 @@ class SmyHelper
     {
         try {
             //@todo dummy终端信息
-            return ['terminalType' => 'app', 'appVersion' => '3.1.0'];
-//            return base64_decode(json_decode($request->header('Terminal')));
+//            return ['terminalType' => 'app', 'appVersion' => '3.1.0'];
+            return json_decode(base64_decode($request->header('Terminal')),true);
         } catch (Exception $exception) {
             throw new Exception('环境信息格式错误');
         }
@@ -72,12 +74,14 @@ class SmyHelper
     protected function getUser(Request $request)
     {
         $record = UserOpenId::where('openId', self::getOpenId($request))->first();
-        return $record->mobilePhoneNo ?? null;
+        return $record->mobilePhoneNo ?? 1;
     }
 
     protected function getAuthTimestamp(Request $request)
     {
+        //@todo dummy终端信息
         return $request->header('AuthTimestamp');
+//        return SDKUtil::msectime();
     }
 
     public function parseResponse($response, $msg)
@@ -100,7 +104,31 @@ class SmyHelper
 
     public static function getOpenId(Request $request)
     {
-        return 'mcfWhcyHyx2lY55rh6myIo5_hov2xwpu21fWxGiLEFA';
-//        return $request->header('OpenId');
+//        return 'mcfWhcyHyx2lY55rh6myIo5_hov2xwpu21fWxGiLEFA';
+        return $request->header('Openid');
+    }
+
+    protected function base64EncodeImage($filePath)
+    {
+        return base64_encode(file_get_contents($filePath));
+    }
+
+    /**
+     * 发送app列表数据
+     *
+     * @param Request $request
+     */
+    protected function sendAppList(Request $request)
+    {
+        try {
+            $appInfoList = $request->get('appInfoList');
+            if ($appInfoList) {
+                $postField['appInfoList'] = json_decode($appInfoList, true);
+                if ($postField['appInfoList']) {
+                    SendAppListToShengBei::dispatch($this->addHeaderPostField($request, $postField),$this->manage);
+                }
+            }
+        } catch (Exception $exception) {
+        }
     }
 }

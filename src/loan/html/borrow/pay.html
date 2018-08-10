@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<meta name="render" content="webkit" />
+<title>借款首页</title>
+<link href="http://10.6.9.244:8056/loan/css/borrow/pay_46080956.css" rel="stylesheet"></head>
+
+<body>
+	<div v-cloak id='wrap'>
+		<div class="content">
+			<item v-show="card_show" mark-subject="收/还款账户" v-on:click.native="changeCard" ico-type="next" :submark-subject="card_infor"></item>
+			<p class="tips">放贷后更换还款卡，可在“我的银行卡”中重设“贷款卡”</p>	
+		</div>
+
+		<div class="box-infor">
+			<div class="hd">
+				<div class="mark">{{infor.hd.text}}</div>
+				<div class="submark"><span>{{infor.hd.val}}</span> 元</div>
+			</div>
+			<div class="bd">
+				<div class="item" v-for="v in infor.list" v-if="v.val">
+					<div class="mark">{{v.text}}</div>
+					<div class="submark">
+						<span class="del-txt" v-if="v.disval">{{v.disval}}</span>
+						<span class="txt">{{v.val}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<foot-btn v-show="card_show" v-on:click.native="next" btn-txt="提交" :is-on="btn_is_on"></foot-btn>
+
+		<page-tips btntext="下一步" v-show="!card_show" title="无借款卡" type="error" v-on:next="changeCard"></page-tips>
+	</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/borrow/pay_cb5a1166.js"></script></body>
+</html>

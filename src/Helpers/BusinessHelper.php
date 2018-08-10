@@ -23,8 +23,8 @@ class BusinessHelper extends SmyHelper
     public function getInstallments(Request $request)
     {
         try {
-//            $response = $this->manage->installments($this->addHeaderPostField($request));
-            $response = ['instalments'=>[3, 6, 12], 'minLoanAmount'=>'5000', 'maxPilotCalcuAmount'=>'8000'];
+            $response = $this->manage->installments($this->addHeaderPostField($request));
+//            $response = ['instalments'=>[3, 6, 12], 'minLoanAmount'=>'5000', 'maxPilotCalcuAmount'=>'8000'];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -41,8 +41,8 @@ class BusinessHelper extends SmyHelper
     {
 //        $params = ['codeType'=>'04'];
         try {
-//            $response = $this->manage->loanDynamicCodes($this->addHeaderPostField($request));
-            $response = null;
+            $response = $this->manage->loanDynamicCodes($this->addHeaderPostField($request));
+//            $response = null;
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -57,10 +57,10 @@ class BusinessHelper extends SmyHelper
      */
     public function getRepaymentDynamicCodes(Request $request)
     {
-        $params = $request->only('bankCarID', 'amount');
+        $params = $request->only('bankCardID', 'amount');
         try {
-//            $response = $this->manage->repaymentDynamicCodes($this->addHeaderPostField($request, $params));
-            $response = null;
+            $response = $this->manage->repaymentDynamicCodes($this->addHeaderPostField($request, $params));
+//            $response = null;
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<meta name="render" content="webkit" />
+<title>还款计划</title>
+<link href="http://10.6.9.244:8056/loan/css/borrow/repay_plan_5fa48376.css" rel="stylesheet"></head>
+
+<body>
+	<div v-cloak id='wrap'>
+		<div class="tips">
+			每月 {{repay_day}} 号自动还款 {{should_repay_amt}} 元。温馨提示：次日起可提前还款。
+		</div>
+		<div class="infor">
+			<p>{{loan_amt}}</p>
+			<p>{{rate_txt}}</p>
+		</div>
+		<div class="time-list">
+			<div v-for="item in list" class="item">
+				<div class="date">
+					<div class="day">{{repay_day}}</div>
+					<div class="month">{{item.month}}</div>
+				</div>
+				<div class="mid">
+					<div class="dot"></div>
+					<div class="line"></div>
+				</div>
+				<div class="txts">
+					<p>{{item.should_repay_amt}} 元</p>
+					<p>{{item.txt}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/borrow/repay_plan_e946e193.js"></script></body>
+</html>

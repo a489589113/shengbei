@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="render" content="webkit" />
+    <title>身份验证</title>
+<link href="http://10.6.9.244:8056/loan/css/borrow/identity_verify_52082d33.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+    <div class="head-info">
+        <li>请确认您的借款信息是否正确，确认无误后我们将发送</li>
+        <li>信息至您的注册手机号3399</li>
+    </div>
+    <div class="detail-info">
+        <div class="detail-info-in">
+            <!--<li>借款人姓名：小熊熊</li>-->
+            <li>借款金额：{{params.loanAmount}}</li>
+            <li>分期(月)：{{params.instalment}}个月 </li>
+            <li>实际月还款：{{params.repayment_plan}}元</li>
+            <li>借款信用卡：{{params.name}}</li>
+        </div>
+    </div>
+    <div class="line"></div>
+    <!--<div class="identity-code">-->
+        <!--<input class="identity-code-r" placeholder="动态验证码">-->
+            <!--<div class="identity-code-l-y"> </div>-->
+        <!--<item>-->
+            <!--<vcode v-on:showcode="getCode" :value="code" :bizcontent="bizcontent" :code-url="'api.smy.dynamic-codes'" :isAuto="true"></vcode>-->
+        <!--</item>-->
+    <!--</div>-->
+    <item class="padding-12">
+        <vcode v-on:showcode="getCode" :value="code" :bizcontent="bizcontent" :code-url="'api.smy.dynamic-codes'" :isAuto="true"></vcode>
+    </item>
+    <div class="service-agree">
+        <span class="sure">点击"提交"即同意</span>
+        <agree></agree>
+    </div>
+    <foot-btn v-on:next="next" btn-txt="提交" :is-on="btn_is_on"></foot-btn>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/borrow/identity_verify_5cc8130f.js"></script></body>
+</html>

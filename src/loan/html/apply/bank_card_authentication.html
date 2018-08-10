@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="render" content="webkit" />
+    <title>银行卡认证</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/bank_card_authentication_9b83d0d9.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+    <shield-info info="信息已智能加密，仅用于银行验证"></shield-info>
+
+    <div class="input-wrapper">
+        <!--<h2 class="name">王小明</h2>
+        <div class="input-item" style="padding-top: 8px">
+            <span class="input-item-label">身份证号</span>
+            <input class="input-item-label" v-model="content.idCardNum" readonly="readonly">
+        </div>-->
+        <div class="input-item">
+            <span class="input-item-label">储蓄卡号</span>
+            <input class="input" type="text" maxlength="25" v-model="content.bankCardNum">
+        </div>
+        <div class="input-item">
+            <span class="input-item-label">预留手机号</span>
+            <input class="input" type="tel" maxlength="11" v-model="content.phoneNum">
+        </div>
+        <item>
+            <vcode v-on:showcode="getCode" :value="content.dynamicCode" :bizcontent="bizcontent" :code-url="'api.smy.card.dynamicCode'" :isAuto="true"></vcode>
+        </item>
+    </div>
+
+    <div class="input-wrapper divider-top">
+        <div class="input-item">
+            <span class="input-item-label">设置自动还款</span>
+            <switch-cell size="10px" @emit-status="setAutoRepayment" :value="content.autoRepayment"> </switch-cell>
+        </div>
+
+        <div class="protocol">
+            <span class="protocol-text">我已阅读并同意</span>
+            <span class="protocol-text point">《芝麻授权书及支付扣款协议》</span>
+        </div>
+    </div>
+
+    <foot-btn v-on:click.native="next" btn-txt='提交' :is-on='isValidate'></foot-btn>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/bank_card_authentication_a73102f6.js"></script></body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="render" content="webkit" />
+	<title>借款首页</title>
+<link href="http://10.6.9.244:8056/loan/css/borrow/index_58a7b7a7.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+	<!--<div class="warn_tips">
+        <p v-if="value.repay_method">折后月费率 {{value.rate}}，借一万元合利息 {{ (value.rate.substr(0, value.rate.length -1)/100 * 10000).toFixed(2) }} 元/月</p>
+        <p v-else>折后日利率 {{value.rate}}，借一万元合利息 {{ (value.rate.substr(0, value.rate.length -1)/100 * 10000).toFixed(2) }} 元/天</p>
+    </div>-->
+	<div class="mode-inp">
+
+		<div class="box-inp">
+			<div class="hd">借款金额</div>
+			<div class="bd">
+				<div class="mark">
+					<div class="sign">¥</div><input type="tel" maxlength="10" v-bind:placeholder="inp_placehodler" v-model="inp_val" v-on:input="inputEvent" class="vue-item-inp">
+				</div>
+				<div class="submark">
+					<p v-bind:class="borrow_btn_class" v-on:click="borrowAll">全部</p>
+				</div>
+			</div>
+			<div class="ft">
+				<div class="mark"><p class="tips">{{amount_inp_warn}}</p></div>
+				<div class="submark"><p class="remain-limit">最高可借：{{remain_limit}} 元{{rate_txt}}</p></div>
+			</div>
+		</div>
+
+		<!--<div class="u-border-top"></div>-->
+
+		<!--<item class="box-choose" v-on:click.native="choosePurposeLimit" mark-subject="用途" :submark-subject="pop_list.data.purpose[pop_list.selected_index.purpose].text" ico-type="select"></item>-->
+
+		<div class="u-border-top"></div>
+
+		<!-- <item class="box-repay-method" v-on:click.native="fn_repay_method" mark-subject="还款方式" submark-subject="等额偿还本金及手续费" v-if="repay_method == 1"></item>
+
+        <item class="box-repay-method" v-on:click.native="fn_repay_method" mark-subject="还款方式" submark-subject="等额本息" v-else></item>
+
+        <item class="box-repay-date" mark-subject="还款日期" :submark-subject="repayment_date"></item>
+
+        <div class="u-border-top"></div> -->
+
+		<div class="box-deadline">
+			<div class="hd">期限</div>
+			<div class="bd">
+				<span class="item" v-for="(v,index) in installment_num_items" v-bind:class="index==installment_index?'item-on':''" v-on:click="installment(index)">{{v.text}}</span>
+			</div>
+		</div>
+
+		<!--<item mark-subject="优惠券" v-show="item_coupon_show" v-on:click.native="choosecoupon" :submark-subject="item_coupon.subtxt" ico-type="next"></item>-->
+		<div class="u-border-top"></div>
+
+		<!--<item class="box-repay-plan box-choose" mark-subject="比信用卡省" :submark-subject="creditCouponAmount"></item>-->
+
+		<!--<item mark-subject="总利息" :submark-subject="total_interest" :submark-subject-attach="total_interest_other" v-else></item>-->
+
+		<!--<item class="box-repay-plan box-choose" mark-subject="实际月还款" v-on:click.native="morePlan" :submark-subject="repayment_plan" :ico-type="plan_isnext"></item>-->
+		<item class="box-repay-plan box-choose" mark-subject="实际月还款" :submark-subject="repayment_plan"></item>
+
+		<!--<agreement v-show="agreement_show" v-on:next="agreement" agreementname="个人额度借款支用单"></agreement>-->
+	</div>
+
+	<poplist :list="pop_list.data[pop_list.cur_pop_key]" v-on:impress="popImpress" :show="repayment_pop_show" :selectindex="pop_list.selected_index[pop_list.cur_pop_key]"></poplist>
+
+	<couponpop :list="pop_coupon.list" v-on:hide="coupon_hide" :show="pop_coupon.show" v-on:trigger="coupon"></couponpop>
+
+	<foot-btn v-on:click.native="next" btn-txt="下一步" :is-on="btn_is_on"></foot-btn>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/borrow/index_f052f9cc.js"></script></body>
+</html>

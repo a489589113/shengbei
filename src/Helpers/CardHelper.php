@@ -24,8 +24,8 @@ class CardHelper extends SmyHelper
     {
         $postField = $request->only('bankCardNo', 'bankCardType', 'reserveMobileNo');
         try {
-//            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
-            $response = null;
+            $response = $this->manage->getDynamicCodes($this->addHeaderPostField($request,$postField));
+//            $response = null;
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -42,8 +42,14 @@ class CardHelper extends SmyHelper
     {
         $postField = $request->only('bankCardType');
         try {
-//            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
-            $depositCard=[
+            $response = $this->manage->getBankCards($this->addHeaderPostField($request, $postField));
+            if (isset($response['bankCardInfoList'])) {
+                $response = $response['bankCardInfoList'];
+            } else {
+                $response = [];
+            }
+
+            /*$depositCard=[
                 [
                     'bankCardID'=>'2',
                     'bankCardNo'=>'2116',
@@ -74,17 +80,17 @@ class CardHelper extends SmyHelper
                 case 2:
                     $response=$creditCard;
                     break;
-            }
-            $bankConfig=config('smySupportBank');
-            foreach ($response as $key=>$item){
-                if (!isset($bankConfig[$item['bankID']])){
-                    $response[$key]['bankLogo']=$bankConfig[$item['bankID']]['bankLogo'];
-                    $response[$key]['bankColor']=$bankConfig[$item['bankID']]['bankColor'];
-                    $response[$key]['bankColorEnd']=$bankConfig[$item['bankID']]['bankColorEnd'];
-                }else{
-                    $response[$key]['bankLogo']=$bankConfig[$item['bankID']]['bankLogo'];
-                    $response[$key]['bankColor']=$bankConfig[$item['bankID']]['bankColor'];
-                    $response[$key]['bankColorEnd']=$bankConfig[$item['bankID']]['bankColorEnd'];
+            }*/
+            $bankConfig = config('smySupportBank');
+            foreach ($response as $key => $item) {
+                if (!isset($bankConfig[$item['bankID']])) {
+                    $response[$key]['bankLogo'] = $bankConfig[$item['bankID']]['bankLogo'];
+                    $response[$key]['bankColor'] = $bankConfig[$item['bankID']]['bankColor'];
+                    $response[$key]['bankColorEnd'] = $bankConfig[$item['bankID']]['bankColorEnd'];
+                } else {
+                    $response[$key]['bankLogo'] = $bankConfig[$item['bankID']]['bankLogo'];
+                    $response[$key]['bankColor'] = $bankConfig[$item['bankID']]['bankColor'];
+                    $response[$key]['bankColorEnd'] = $bankConfig[$item['bankID']]['bankColorEnd'];
                 }
             }
         } catch (Exception $exception) {

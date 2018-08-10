@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="render" content="webkit" />
+    <title>添加信用卡</title>
+<link href="http://10.6.9.244:8056/loan/css/bank/addcredit_df8aec4a.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+    <shield-info info="请输入本人名下的真实信用卡号"></shield-info>
+
+    <div class="input-wrapper">
+        <div class="input-item">
+            <span class="input-item-label">卡号</span>
+            <input class="input" type="number" placeholder="请输入信用卡卡号" v-model="biz_content.bankCardNo">
+
+        </div>
+    </div>
+
+    <div class="input-wrapper">
+        <div class="protocol">
+            <span class="protocol-text">我已阅读并同意</span>
+            <agree></agree>
+        </div>
+    </div>
+    <!--<foot-btn v-on:click.native="next" btn-txt='提交' :is-on='btn_status'></foot-btn>-->
+    <foot-btn v-on:next="next" btn-txt='提交' :is-on='btn_status'></foot-btn>
+
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/bank/addcredit_32ffeacf.js"></script></body>
+</html>

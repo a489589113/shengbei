@@ -23,13 +23,13 @@ class IdentityHelper extends SmyHelper
     public function checkExistence(Request $request)
     {
 //        dump($request);
-        $postFields = $request->only('mobilePhoneNo','idNo');
+        $postFields = $request->only('mobilePhoneNo', 'idNo');
         try {
-            $response = $this->manage->userExisting($this->addHeaderPostField($request,$postFields));
+            $response = $this->manage->userExisting($this->addHeaderPostField($request, $postFields));
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
-        return $this->parseResponse($response, '用户存在');
+        return $this->parseResponse($response, '查询成功');
     }
 
     /**
@@ -41,11 +41,15 @@ class IdentityHelper extends SmyHelper
     public function addDebitCard(Request $request)
     {
         $params = $request->only('bankCardNo', 'mobilePhoneNo', 'autoRepayment', 'dynamicCode', 'name', 'idNo');
+        $params['autoRepayment'] = $params['autoRepayment'] ? true : false;
         $params['bankCardType'] = '1';
         $params['needValid'] = true;
         try {
-//            $response = $this->manage->addBankCard($this->addHeaderPostField($request, $params));
-            $response = ['bankId'=>'01040000', 'bankCardID'=>$request->get('bankCardNo')];
+            $response = $this->manage->addBankCard($this->addHeaderPostField($request, $params));
+            if (isset($response['bankId'])&&$response['bankId']){
+                $this->sendAppList($request);
+            }
+//            $response = ['bankId'=>'01040000', 'bankCardID'=>$request->get('bankCardNo')];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -65,8 +69,8 @@ class IdentityHelper extends SmyHelper
         $params['autoRepayment'] = false;
         $params['needValid'] = false;
         try {
-//            $response = $this->manage->addBankCard($this->addHeaderPostField($request, $params));
-            $response = ['bankId'=>'01020000', 'bankCardID'=>$request->get('bankCardNo')];
+            $response = $this->manage->addBankCard($this->addHeaderPostField($request, $params));
+//            $response = ['bankId'=>'01020000', 'bankCardID'=>$request->get('bankCardNo')];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -83,8 +87,8 @@ class IdentityHelper extends SmyHelper
     {
         $params = $request->only('bankCardID');
         try {
-//            $response = $this->manage->deleteBankCard($this->addHeaderPostField($request, $params));
-            $response = null;
+            $response = $this->manage->deleteBankCard($this->addHeaderPostField($request, $params));
+//            $response = null;
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -101,8 +105,9 @@ class IdentityHelper extends SmyHelper
     {
         $params = $request->only('bankCardID', 'autoRepayment');
         try {
-//            $response = $this->manage->autoRepayment($this->addHeaderPostField($request, $params));
-            $response = null;
+            $params['autoRepayment'] = $params['autoRepayment'] ? true : false;
+            $response = $this->manage->autoRepayment($this->addHeaderPostField($request, $params));
+//            $response = null;
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -122,13 +127,13 @@ class IdentityHelper extends SmyHelper
     public function getProtocols(Request $request)
     {
         try {
-//            $response = $this->manage->getProtocols($this->addHeaderPostField($request));
-            $response = [['type'=>'01', 'title'=>'个人信息查询及使用授权书', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_person_credit/shengbei_personcredit_agreement_h5.html'],
-                         ['type'=>'02', 'title'=>'个人征信信息查询及使用授权书', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_person_info/shengbei_personinfo_agreement_h5.html'],
-                         ['type'=>'03', 'title'=>'消费贷授信协议', 'url'=>'https://static.smyfinancial.com/static_app/agreement/harbin/heb_agreement_h5.html'],
-                         ['type'=>'04', 'title'=>'萨摩耶服务协议', 'url'=>'https://static.smyfinancial.com/static_app/agreement/smy_service/smy_service_agreement_h5.html'],
-                         ['type'=>'05', 'title'=>'账户委托扣款授权书', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_deduct/deduct_agreement_h5.html'],
-                         ['type'=>'06', 'title'=>'自动还款协议', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_repayment/repayment_agreement_h5.html']];
+            $response = $this->manage->getProtocols($this->addHeaderPostField($request));
+//            $response = [['type'=>'01', 'title'=>'个人信息查询及使用授权书', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_person_credit/shengbei_personcredit_agreement_h5.html'],
+//                         ['type'=>'02', 'title'=>'个人征信信息查询及使用授权书', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_person_info/shengbei_personinfo_agreement_h5.html'],
+//                         ['type'=>'03', 'title'=>'消费贷授信协议', 'url'=>'https://static.smyfinancial.com/static_app/agreement/harbin/heb_agreement_h5.html'],
+//                         ['type'=>'04', 'title'=>'萨摩耶服务协议', 'url'=>'https://static.smyfinancial.com/static_app/agreement/smy_service/smy_service_agreement_h5.html'],
+//                         ['type'=>'05', 'title'=>'账户委托扣款授权书', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_deduct/deduct_agreement_h5.html'],
+//                         ['type'=>'06', 'title'=>'自动还款协议', 'url'=>'https://static.smyfinancial.com/static_app/agreement/shengbei_repayment/repayment_agreement_h5.html']];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -144,8 +149,8 @@ class IdentityHelper extends SmyHelper
     public function getBankCreditPrompt(Request $request)
     {
         try {
-//            $response = $this->manage->getBankCreditPrompt($this->addHeaderPostField($request));
-            $response = ['prompt'=>'征信提示', 'personalCreditAuthUrl'=>''];
+            $response = $this->manage->getBankCreditPrompt($this->addHeaderPostField($request));
+//            $response = ['prompt'=>'征信提示', 'personalCreditAuthUrl'=>''];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -163,8 +168,8 @@ class IdentityHelper extends SmyHelper
         $params = $request->only('mobilePhoneNo');
         $params['dynamicCodeType'] = '01';
         try {
-//            $response = $this->manage->sendRegDynamicCode($this->addHeaderPostField($request, $params));
-            $response = null;
+            $response = $this->manage->sendRegDynamicCode($this->addHeaderPostField($request, $params));
+//            $response = null;
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }

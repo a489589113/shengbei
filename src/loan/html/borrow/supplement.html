@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="render" content="webkit" />
+<title>补全信息</title>
+<link href="http://10.6.9.244:8056/loan/css/borrow/supplement_69877f4f.css" rel="stylesheet"></head>
+
+<body>
+	<div v-cloak id='wrap'>
+		<div class="warn_tips">
+			<p>应相关法规和监督规定，需先补全信息</p>
+		</div>
+		<div class="head_title">
+			<h3>公司信息</h3>
+		</div>
+
+		<choose-location v-if="!is_location_new" :pro_city_name="pro_city_name" :area_name="area_name" v-on:show="getLocationData" :locationcity="locationcity"></choose-location>
+        <choose-location-v v-else v-on:show="getLocationData_v2" :text="location_text" :locationcity="locationcity"></choose-location-v>
+
+		<item mark-subject='详细地址'>
+			<div class="amount-inp" slot='submark'>
+				<input type="text" placeholder="请输入详细地址" v-model="biz_content.company_adr_detailed" class="vue-item-inp">
+			</div>
+		</item>
+          <!-- <item mark-subject='所在地区'>
+            <input class="vue-item-inp" maxlength="11" v-model="biz_content.company_adr_area_code" placeholder="" slot="submark" type="tel" name="emerg_relative_phone" id="">
+          </item>
+          <item mark-subject='详细地址'>
+            <input class="vue-item-inp" maxlength="11" v-model="biz_content.company_adr_detailed" placeholder="请输入详细地址" slot="submark" type="text" name="emerg_relative_phone" id="">
+          </item> -->
+		<div class="head_title">
+			<h3>家庭联系人</h3>
+		</div>
+		<item mark-subject='姓名'>
+			<div class="amount-inp" slot='submark'>
+				<input type="text" maxlength="15" placeholder="请输入姓名" v-model="biz_content.relative_name" class="vue-item-inp">
+			</div>
+		</item>
+		<item mark-subject='电话'>
+			<div class="amount-inp" slot='submark'>
+				<input type="tel" maxlength="11" placeholder="请输入电话" v-model="biz_content.relative_phone" class="vue-item-inp">
+			</div>
+		</item>
+		<item mark-subject='与本人关系' class="box-choose" ico-type="select" :submark-subject="pop_list.data.relative_ship[pop_list.selected_index.relative_ship].text" v-on:click.native="pop('relative_ship')"></item>
+
+		<poplist :list="pop_list.data[pop_list.cur_pop_key]" v-on:impress="popImpress" :show="pop_show" :selectindex="pop_list.selected_index[pop_list.cur_pop_key]"></poplist>
+
+    	<foot-btn v-on:next="next" btn-txt='开始借钱' :is-on='btn_status'></foot-btn>
+
+	</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/borrow/supplement_1f923909.js"></script></body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="render" content="webkit" />
+  <title>贷款申请-活体验证</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/face_verify_d2e1fc69.css" rel="stylesheet"></head>
+
+<body>
+  <div v-cloak id='wrap'>
+    <div class="box-face">
+      <img :src="img_face_01" width="100%" alt="活体验证">
+      <p class="box-face-tips" v-html="tips"></p>
+      <img :src="img_face_02" width="100%" alt="活体验证">
+      <!--<div class="box-switch" v-if="is_white">
+        <span class="ico-switch" v-on:click="fnswitch"></span>
+        <p v-on:click="fnswitch">切换至自拍模式</p>
+      </div>-->
+      <foot-btn v-on:next="next('first')" v-show="!again_show" btn-txt='开始验证' :is-on='btn_status'></foot-btn>
+      <div class="foot-btn-two" v-show="again_show">
+        <div class="btn" v-on:click="cancel">退出验证</div>
+        <div class="btn" v-on:click="next('again')">再试一次</div>
+      </div>
+    </div>
+
+  </div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/face_verify_5c3003d8.js"></script></body>
+</html>

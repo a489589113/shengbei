@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+	<meta name="render" content="webkit" />
+	<title>贷款首页</title>
+<link href="http://10.6.9.244:8056/loan/css/index/index_65213876.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap' class="wrap">
+	<div class="content">
+		<!-- 未申请 -->
+		<div v-if="apply_show" class="box-apply">
+			<img v-on:click="apply" v-bind:src="banner_img" width="100%" alt="贷款申请" class="banner">
+			<div class="sum">
+				<p>最高可借2万</p>
+				<p>无需繁琐手续，线上直接放款</p>
+			</div>
+			<div class="infor">
+				<div class="item">
+					<p>2万</p>
+					<span>最高可借</span>
+				</div>
+				<div class="line"></div>
+				<div class="item">
+					<p>4.9元起</p>
+					<span>月息仅</span>
+				</div>
+				<div class="line"></div>
+				<div class="item">
+					<p>3秒</p>
+					<span>极速放款</span>
+				</div>
+			</div>
+			<div class="btn" v-on:click="apply" v-bind:class="apply_btn_class">{{apply_btn_text}}</div>
+			<p class="borrow-tips">{{borrow_tips}}</p>
+		</div>
+		<!-- 借钱 -->
+		<div v-else class="mod-borrow">
+			<div class="box box-borrow">
+				<div class="remain-limit">
+					<p>{{remain_limit}}</p>
+					<div class="remain-limit-bd">
+						<span class="remain-limit-bd-txt">可借贷额度（元）</span>
+					</div>
+				</div>
+				<div class="infor sum-money">
+					<div class="item">
+						<div class="item-col">
+							<p>{{total_limit}}</p>
+							<span style="margin-right:-7px">总额度（元）</span>
+						</div>
+					</div>
+					<!--<div class="line"></div>
+					<div class="item">
+						<div class="item-col">
+							<template v-if="repay_method == 0">
+								<p><i class="item-now-rate">{{day_rate}}</i><del class="item-origin-rate">{{origin_day_rate}}</del></p>
+								<span class="item-rate-txt" style="margin-left:-5px">日利率</span>
+							</template>
+							<template v-else>
+								<p><i class="item-now-rate">{{fee_rate}}</i><del class="item-origin-rate">{{mz_day_rate}}</del></p>
+								<span class="item-rate-txt" style="margin-left:-5px">月费率</span>
+							</template>
+						</div>
+					</div>-->
+				</div>
+				<div class="btn" v-bind:class="borrow_btn_class" v-on:click="borrow">{{apply_btn_text}}</div>
+				<p class="borrow-tips">{{borrow_tips}}</p>
+			</div>
+			<!-- 还款 -->
+			<item class="box-repay" v-bind:class="repay_class" v-if="repay_show" v-on:click.native="repayment" ico-type="next" :mark-subject="repayment_title" :submark-subject="repayment_money" :mark-subject-attach="repayment_date"></item>
+		<!--<agree  v-on:opendetail="next"></agree>-->
+		<agreedocu :show="show_agree_detail" v-on:impress="popImpress" v-on:pick="openDocu" :message="agreelist" ></agreedocu>
+		</div>
+		<div v-show="rig_top_show">
+			<div class="pop-list">
+				<div class="pop-bd" v-bind:style= "advRepay_color" @click="toRepay">
+					提前还款
+					<div class="pop-line-x"></div>
+				</div>
+				<div class="pop-bd" v-bind:style= "cardManage_color" @click="toBankcard">
+					银行卡管理
+					<div class="pop-line-x"></div>
+				</div>
+				<div class="pop-bd" @click="closeRigTop" v-bind:style= "aboutIsClick_color">
+					关于
+				</div>
+			</div>
+			<div class="pop-cover" @click="closeRigTop"></div>
+		</div>
+		<div :class="['award_enter', awards_enter ? 'stop' : 'wave']"  @click="award_enter" v-if="limit_apply_status == 3 || limit_apply_status == 7 || limit_apply_status == 9">
+			<img src="data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAjCAMAAAC0CkrjAAAAAXNSR0IB2cksfwAAAg1QTFRF72dO7mdN7mZN7mpO72tO7WpO72pO729P7m5P725P7XJP7nJQ7nJP73JQ7XFP73dR7ndR7nZQ7ndQ7ntR73tS73xS74BT7oBS74BS8IBT7n9S7oRT74VT74VU8IpV74lU749U745W7o1V745W745V8I5W745V749YAAAA75dY75NW8JNX75JW75NW8ZRY749Y75dY75dX8JhY75dX8JdX7pdX8JhX75dX8E9P8FBQ759g75tY8JxZ75xY8JxZ75tY8J1Z8JxY75xY8Zta71BQ7k9P709P705O8E9P7k9P759Z759Z8KBZ759Z8J9Z759Y705O7k1N7k1N7k1N7k1N605O76Va8KRa76Na8aRa8KRa76Na8qVa60xM8E1N7kxM7UxM7k1N7kxM7ktL76lZ76da8Kda76dc7kxM7UtL7UtL7UpK7UpK7ktL7ExM7ktL7UtL7EpK7UpK7EhI7kpK60hI7EhI7EhI7EdH6EZG60dH60dH6kdH60dH6UVF6kVF6ERE6UND6URE6END6EFB50JC50FB6UJC50FB6EFB6EFB50BA5j8/50BA5z8/5T4+5T095j095j4+5Ds75Dw85Ds74zo64zs74zw85Ds74jk54zk54zg44jc34TY24Tc34jc34DY24DU14DU14DQ03zMz4DQ04DQ03zQ03zIy3zMz3zMz3jEx3zEx3zIywyhzWwAAAK90Uk5T//////////////////////////////////////////9AwP////+wQAAgoP///6AgoPD/////8JCaMxCA8P//////8IBAms/OtU1w4P//4GBOtdDRtg1g4P///+BgW7bT09LGaVDAwEDF1NXVx3cbhMjX14aG2dmVNjei3Nzb3t7h4OHg4uPj4+Lm5ebo6Ofr6urr7O3t8O/w7/Hy9PT29vb2+fj4+vv6+v38/f7+/ldFOG0AAAGsSURBVHicY2BgZGDCg5lZWJmZ2YAYRDNDaTifgZ2DnYOTg50DO83Axc3DC8N8SGwIn4FfgF8QjIWgNAqfQVgECEXBJALC+Qxi4mISYuKSEmJSQBaIRuEzSMtIy4IhVppBTh4fZFBQVFJWUcWO1dQZNDQ0tbR1tHUxsZ6+hgZQGqjAwNDI2MTYyNTYGEabmWuCZBgsLEGUlbWNrZ29g6OdrR2IdnK2Aom6uDK4uXt4ghV4efv4QqCfP1gyINDNnSEoOCg4JCAUxA8Lj4iMioqOAbFDY+NAMgzxCfGJ8QlJyWAFKalp6WDJ5AyIOENmVmY2COfk5mlAQV5+AUQsM4uhsLCoEIqLwQrySgoRYgylpaVlcFxeUVmFzC9lqK4Bw1oIXVOLymeoq8cHGRoamxobmoEYK83Q0trWDsMdSGwIn6Gzq7sLN2bo6e3r6ent6cFOM/RP6J/YP2HSRAgNwzA+w+QpIDh1CnaaYdp0CJwxE8ZC5jPMmo0PMsyZiw8yzJs/b8HCefMWYKcZFi1etAQ3Zli6bOnyFcuWLsNOM6xctXoVbsywZi0YrsNOAwDDfXpzBe25ZwAAAABJRU5ErkJggg==">
+			<span>我的红包</span>
+		</div>
+        <footlable v-on:heihei="heihei"></footlable>
+	</div>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/index/index_2b91ded0.js"></script></body>
+</html>

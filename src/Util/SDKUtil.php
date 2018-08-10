@@ -105,11 +105,11 @@ class SDKUtil
         $ch = curl_init();
         $ssl = substr($url, 0, 8) == "https://" ? TRUE : FALSE;
         $header = $this->getHeaderStr($url, $postFields, $type);
-        Log::info($header);
+//        Log::info($header);
         Log::info("body入参:");
-        Log::info($postFields);
+        Log::info(json_encode($postFields));
         if ($type == 'post') {
-            Log::info(json_encode($postFields));
+//            Log::info(json_encode($postFields));
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postFields));
             curl_setopt($ch, CURLOPT_POST, 1);
         } elseif ($type == 'get') {
@@ -120,9 +120,9 @@ class SDKUtil
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postFields));
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
         }
+        Log::info("请求URL:".$apiLink);
         Log::info("header入参:");
         Log::info($header);
-        Log::info("请求URL:".$apiLink);
         curl_setopt($ch, CURLOPT_URL, $apiLink);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 60);
@@ -136,6 +136,7 @@ class SDKUtil
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         }
         $response = json_decode(curl_exec($ch), true);
+        Log::info($response);
         if (curl_errno($ch)) {
             throw new Exception(curl_error($ch), 0);
         } else {
@@ -150,10 +151,7 @@ class SDKUtil
 
     public static function generateHMAC($byteToSign)
     {
-//        Log::info('HeaderString:'.$byteToSign);
-        $hash = base64_encode(hash_hmac('sha1', $byteToSign, Config::getConfig()->hmac, true));
-//        Log::info("hmac:".$hash);
-        return $hash;
+        return base64_encode(hash_hmac('sha1', $byteToSign, Config::getConfig()->hmac, true));
     }
 
     public static function getBytes($string) {

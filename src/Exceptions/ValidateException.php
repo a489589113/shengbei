@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Crius\Smy\Exceptions;
 
 use Exception;
 use Illuminate\Contracts\Routing\ResponseFactory;

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="render" content="webkit" />
+  <title>完善资料</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/perfect_data_53cb1478.css" rel="stylesheet"></head>
+
+<body>
+  <div v-cloak id='wrap'>
+    <div class="content">
+    	  <hd text="公司信息"></hd>
+        <div class="p-box">
+          <item mark-subject='单位名称'>
+            <input class="vue-item-inp" maxlength="50" v-model="biz_content.company_name" placeholder="请输入单位名称" slot="submark" type="text" name="company_name" id="">
+          </item>
+          
+          <choose-location v-if="!is_location_new" :pro_city_name="pro_city_name" :area_name="area_name" v-on:show="getLocationData" :locationcity="locationcity"></choose-location>
+          <choose-location-v v-else v-on:show="getLocationData_v2" :text="location_text" :locationcity="locationcity"></choose-location-v>
+          
+                  <item mark-subject='详细地址'>
+            <input class="vue-item-inp" maxlength="100" v-model="biz_content.company_adr_detailed" placeholder="请输入地址" slot="submark" type="text" name="company_adr_detailed" id="">
+                  </item>
+         <!--  <item mark-subject='企业规模' class="box-choose" ico-type="select" :submark-subject="company_scale_txt" v-on:click.native="pop('company_scale')"></item> -->
+          <item mark-subject='行业类别' class="box-choose" ico-type="select" :submark-subject="company_industry_type_txt" v-on:click.native="pop('company_industry_type')"></item>
+        </div>
+
+        <hd text="个人信息"></hd>
+
+        <div class="p-box">
+          <item mark-subject='最高学历' class="box-choose" ico-type="select" :submark-subject="education_degree_txt" v-on:click.native="pop('education_degree')"></item>
+          <!-- <item mark-subject='毕业年份' class="box-choose" ico-type="select" :submark-subject="education_graduate_year_txt" v-on:click.native="pop('education_graduate_year')"></item> -->
+          <item mark-subject='月收入' class="box-choose" ico-type="select" :submark-subject="monthly_salary_txt" v-on:click.native="pop('monthly_salary')"></item>
+           <!-- <item mark-subject='QQ（选填）'>
+            <input class="vue-item-inp" maxlength="20" v-model="qq_val"  placeholder="请输入QQ号" slot="submark" type="tel" name="qq" id="">
+          </item> -->
+        </div>
+
+        <hd text="紧急联系人"></hd>
+        <div class="p-box">
+          <item mark-subject='姓名'>
+            <div class="select_contacts" slot="submark" v-if="support_contact">
+                <input class="vue-item-inp" maxlength="15" v-model="biz_content.emerg_relative_name" placeholder="请输入姓名"  type="text" name="emerg_relative_name" id="" v-on:input="inpevnet">
+                <i class="icon" @click="select_contacts" v-if="!biz_content.emerg_relative_name"></i>
+                <i class="icon close" @click="clear_contacts" v-else></i>
+            </div>
+            <input class="vue-item-inp" maxlength="15" slot="submark" v-model="biz_content.emerg_relative_name" placeholder="请输入姓名"  type="text" name="emerg_relative_name" id="" v-else v-on:input="inpevnet">
+          </item>
+          <item mark-subject='手机'>
+            <input class="vue-item-inp" maxlength="11" v-model="biz_content.emerg_relative_phone" placeholder="请输入手机" slot="submark" type="tel" name="emerg_relative_phone" id="">
+          </item>
+          <item mark-subject='与本人关系' class="box-choose" ico-type="select" :submark-subject="emerg_relative_ship_txt" v-on:click.native="pop('emerg_relative_ship')"></item>
+          <agreement v-on:next="areement" agreementname="征信授权及贷款服务合同"></agreement>
+        </div>
+    </div>
+
+
+    <poplist v-on:impress="pop_impress" :show="pop_show" :list="pop_list" :selectindex="selectindex"></poplist>
+    <foot-btn v-on:next="next" btn-txt='下一步' :is-on='btn_status'></foot-btn>
+  </div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/perfect_data_567417af.js"></script></body>
+</html>

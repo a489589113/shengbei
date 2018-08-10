@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="render" content="webkit" />
+    <title>选择信用卡</title>
+<link href="http://10.6.9.244:8056/loan/css/borrow/select_credit_0724a2ba.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+    <div class="mode-inp">
+        <div class="mode-inp-left">请选择信用卡</div>
+        <div class="mode-inp-right" @click="toAddCredit">+ 添加信用卡</div>
+    </div>
+    <div class="body">
+    <div class="pick-box"  @click="openCardList">
+        <div class="card-detail">
+            <div class="card-logo">
+                <img :src="required_content.logo">
+            </div>
+            <div class="card-name"> {{required_content.name}}</div>
+        </div>
+        <div class="pick-btn"></div>
+    </div>
+        <div class="line-x"></div>
+
+    <poplist :list="card_list" v-on:impress="popImpress" :show="card_list_show" :selectindex="selectindex"></poplist>
+        <!--:selectindex="pop_list.selected_index[pop_list.cur_pop_key]"-->
+
+    <!--<couponpop :list="pop_coupon.list" v-on:hide="coupon_hide" :show="pop_coupon.show" v-on:trigger="coupon"></couponpop>-->
+
+    <foot-btn v-on:next="next" btn-txt="下一步" :is-on="btn_is_on"></foot-btn>
+    </div>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/borrow/select_credit_0ad6b991.js"></script></body>
+</html>

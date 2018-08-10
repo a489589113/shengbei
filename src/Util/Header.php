@@ -36,9 +36,9 @@ class Header
     /**
      * 设置用户
      */
-    public function setUser($mobilePhoneNo,$custNo)
+    public function setUser($mobilePhoneNo, $custNo)
     {
-        $this->header['X-SMY-User'] = 'mobilePhoneNo='.$mobilePhoneNo.';externalCustNo='.$custNo;
+        $this->header['X-SMY-User'] = 'mobilePhoneNo=' . $mobilePhoneNo . ';externalCustNo=' . $custNo;
     }
 
     /**
@@ -47,7 +47,6 @@ class Header
     public function setRequestID()
     {
         $requestId = SDKUtil::genRequestID();
-//        $this->header['X-SMY-Request-ID'] = $requestId;
         $this->header['X-SMY-Request-ID'] = $requestId;
     }
 
@@ -56,7 +55,6 @@ class Header
      */
     public function setAuthTimestamp($timestamp)
     {
-//        $this->header['X-SMY-Auth-Timestamp'] = $timestamp;
         $this->header['X-SMY-Auth-Timestamp'] = $timestamp;
     }
 
@@ -79,8 +77,11 @@ class Header
         ]);
         $headArr = [];
         foreach ($terminal as $key => $value) {
-            if (!is_string($value)) {
-                throw new Exception("终端信息中所有值必须为 string");
+            if (is_array($value)) {
+                throw new Exception("终端信息值类型错误");
+            }
+            if (is_bool($value)) {
+                $value = $value ? "true" : "false";
             }
             array_push($headArr, $key . '=' . urlencode($value));
         }
@@ -98,8 +99,11 @@ class Header
     {
         $headArr = [];
         foreach ($environment as $key => $value) {
-            if (!is_string($value)) {
-                throw new Exception("环境信息中所有值必须为 string");
+            if (is_array($value)) {
+                throw new Exception("环境信息类型错误");
+            }
+            if (is_bool($value)) {
+                $value = $value ? "true" : "false";
             }
             array_push($headArr, $key . '=' . urlencode($value));
         }

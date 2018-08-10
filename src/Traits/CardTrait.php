@@ -33,7 +33,7 @@ trait CardTrait
         if (!isset($postFields['bankCardID']) || !$postFields['bankCardID']) {
             throw new \Exception('银行卡ID不能为空');
         }
-        return $this->util->delete('/bdapi/bank-cards/' . $postFields['bankCardID']);
+        return $this->util->delete('/bdapi/bank-cards/' . $postFields['bankCardID'],$postFields);
     }
 
     /**

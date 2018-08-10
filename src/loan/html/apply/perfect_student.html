@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="render" content="webkit" />
+  <title>完善资料</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/perfect_student_99e79bee.css" rel="stylesheet"></head>
+
+<body>
+  <div v-cloak id='wrap'>
+	<div class="content">
+		<hd text="学籍信息"></hd>
+		
+		<div class="p-box">
+			<choose-location v-if="!is_location_new" v-on:show="getLocationData" :pro_city_name="pro_city_name" :area_name="area_name"  :locationcity="detail.school_adr_city"></choose-location>
+			        <choose-location-v v-else v-on:show="getLocationData_v2" :text="location_text" :locationcity="detail.school_adr_city"></choose-location-v>
+			
+			<div v-bind:class='school_name_class'>
+				<item mark-subject='学校名称' ico-type="next" :submark-subject="selectText.school_name" @click.native="setPopListData('school_name')"></item>
+			</div>
+			
+			<item mark-subject='学校地址'>
+				<input class="vue-item-inp" maxlength="100" v-model="detail.school_adr_detail" placeholder="请输入学校地址" slot="submark" type="text">
+			</item>
+			
+			<item mark-subject='入学年份' class="box-choose" ico-type="select" :submark-subject="selectText.enroll_year" @click.native="setPopListData('enroll_year')"></item>
+			<item mark-subject='在读学历' class="box-choose" ico-type="select" :submark-subject="selectText.current_degree" @click.native="setPopListData('current_degree')"></item>
+		</div>
+
+
+		<hd text="紧急联系人"></hd>
+		<div class="p-box">
+			<item mark-subject='姓名'>
+				<div class="select_contacts" slot="submark" v-if="support_contact">
+			              <input class="vue-item-inp" maxlength="15" v-model="detail.emerg_relative_name" placeholder="请输入姓名" slot="submark" type="text" v-on:input="inpevnet">
+			              <i class="icon" @click="select_contacts" v-if="!detail.emerg_relative_name"></i>
+			              <i class="icon close" @click="clear_contacts" v-else></i>
+			          </div>
+				<input class="vue-item-inp" maxlength="15" v-model="detail.emerg_relative_name" placeholder="请输入姓名" slot="submark" type="text" v-else v-on:input="inpevnet">
+			</item>
+			<item mark-subject='手机'>
+				<input class="vue-item-inp" maxlength="11" v-model="detail.emerg_relative_phone" placeholder="请输入手机" slot="submark" type="tel">
+			</item>
+			<item mark-subject='与本人关系' class="box-choose" ico-type="select" :submark-subject="selectText.emerg_relative_ship"  @click.native="setPopListData('emerg_relative_ship')"></item>
+			
+			<agreement v-on:next="areement" agreementname="征信授权及贷款服务合同"></agreement>
+		</div>
+	</div>
+
+	<poplist v-on:impress="getPopSelect" :show="pop.show" :list="pop.data" :selectindex="pop[pop.type]"></poplist>
+
+	<foot-btn v-on:next="next" btn-txt='下一步' :is-on='btn_status'></foot-btn>
+
+  </div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/perfect_student_a7dd0052.js"></script></body>
+</html>

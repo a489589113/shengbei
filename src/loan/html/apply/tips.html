@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="render" content="webkit" />
+  <title>申请提示</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/tips_b7436755.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+  <page-tips title="已提交申请，请等待审批" text="结果预计在1个工作日左右以短信形式通知" v-on:next="next"></page-tips>
+  <div class="setpassword" v-if="show_setpassword&&support_pwd">
+    <span v-on:click="setpassword">设置支付密码，</span>借钱更快捷
+  </div>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/tips_95e071b5.js"></script></body>
+</html>

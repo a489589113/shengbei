@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
+    <meta name="render" content="webkit"/>
+    <title>运营商认证</title>
+<link href="http://10.6.9.244:8056/loan/css/apply/mobilecarriers_verify_ffe5f70e.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='halou'>
+    <div class="content">
+        <div class="p-box">
+            <item mark-subject='手机号码'>
+                <input class="vue-item-inp" maxlength="11" v-model="phone" disabled="disabled" slot="submark" type="tel"
+                       name="shou">
+            </item>
+            <item mark-subject='服务密码'>
+                <input class="vue-item-inp" maxlength="6" v-model="mobileServerPwd" placeholder="登录手机营业厅6位密码" slot="submark" type="tel" name="fu">
+            </item>
+            <item v-show="showCodeInput">
+                <vcode v-on:showcode="getCode" :value="code" :bizcontent="bizcontent"
+                       :code-url="'api.smy.subPhoneAuth'" :isAuto="true"></vcode>
+            </item>
+        </div>
+    </div>
+    <foot-Btn v-on:next="next('first')" v-show="!again_show" btn-txt='确认' :is-on='btn_status'></foot-Btn>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/mobilecarriers_verify_846cdb3f.js"></script></body>
+</html>

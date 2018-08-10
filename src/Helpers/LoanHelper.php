@@ -26,12 +26,13 @@ class LoanHelper extends SmyHelper
     {
         $postField = $request->only('loanAmount', 'instalment', 'bankCardID', 'dynamicCode');
         try {
-//            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
-            $response = [
-                'transSeqNo' => time() . SDKUtil::genRandomNumber(4),
-                'bank' => '交通银行',
-                'overduePrompt' => '逾期提示'
-            ];
+            $this->sendAppList($request);
+            $response = $this->manage->applyLoan($this->addHeaderPostField($request,$postField));
+//            $response = [
+//                'transSeqNo' => time() . SDKUtil::genRandomNumber(4),
+//                'bank' => '交通银行',
+//                'overduePrompt' => '逾期提示'
+//            ];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -48,42 +49,42 @@ class LoanHelper extends SmyHelper
     {
         $postField = $request->only('loanAmount', 'instalment');
         try {
-//            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
-            /** @var integer $capitalAmount 每期本金 */
-            $capitalAmount = '1000.00';
-            /** @var integer $feeAmount 每期费用 */
-            $feeAmount = '10.00';
-            /** @var integer $totalFeeAmount 总费用 */
-            $totalFeeAmount = '30.00';
-            /** @var integer $totalServiceChargeFeeAmount 总服务费 */
-            $totalServiceChargeFeeAmount = '20.00';
-            /** @var integer $totalCouponFeeAmount 总优惠手续费 */
-            $totalCouponFeeAmount = '10.00';
-            /** @var integer $totalFreeFeeCount 总优惠期数 */
-            $totalFreeFeeCount = '3';
-            /** @var integer $creditCouponAmount 比信用卡优惠金额 */
-            $creditCouponAmount = '10.00';
-            /** @var double $creditCouponPercent 比信用卡优惠百分百比 */
-            $creditCouponPercent = '0.05';
-            /** @var string $custLevelDesc 等级描述 */
-            $custLevelDesc = '享信用卡日利率0.5‰的';
-            /** @var string $custLevelDiscount 等级折扣 */
-            $custLevelDiscount = '9.8折';
-            /** @var double $monthlyInterest 月利率 */
-            $monthlyInterest = '0.05';
-            $response = [
-                'capitalAmount' => $capitalAmount,
-                'feeAmount' => $feeAmount,
-                'totalFeeAmount' => $totalFeeAmount,
-                'totalServiceChargeFeeAmount' => $totalServiceChargeFeeAmount,
-                'totalCouponFeeAmount' => $totalCouponFeeAmount,
-                'totalFreeFeeCount' => $totalFreeFeeCount,
-                'creditCouponAmount' => $creditCouponAmount,
-                'creditCouponPercent' => $creditCouponPercent,
-                'custLevelDesc' => $custLevelDesc,
-                'custLevelDiscount' => $custLevelDiscount,
-                'monthlyInterest' => $monthlyInterest,
-            ];
+            $response = $this->manage->ratesCalculate($this->addHeaderPostField($request,$postField));
+//            /** @var integer $capitalAmount 每期本金 */
+//            $capitalAmount = '1000.00';
+//            /** @var integer $feeAmount 每期费用 */
+//            $feeAmount = '10.00';
+//            /** @var integer $totalFeeAmount 总费用 */
+//            $totalFeeAmount = '30.00';
+//            /** @var integer $totalServiceChargeFeeAmount 总服务费 */
+//            $totalServiceChargeFeeAmount = '20.00';
+//            /** @var integer $totalCouponFeeAmount 总优惠手续费 */
+//            $totalCouponFeeAmount = '10.00';
+//            /** @var integer $totalFreeFeeCount 总优惠期数 */
+//            $totalFreeFeeCount = '3';
+//            /** @var integer $creditCouponAmount 比信用卡优惠金额 */
+//            $creditCouponAmount = '10.00';
+//            /** @var double $creditCouponPercent 比信用卡优惠百分百比 */
+//            $creditCouponPercent = '0.05';
+//            /** @var string $custLevelDesc 等级描述 */
+//            $custLevelDesc = '享信用卡日利率0.5‰的';
+//            /** @var string $custLevelDiscount 等级折扣 */
+//            $custLevelDiscount = '9.8折';
+//            /** @var double $monthlyInterest 月利率 */
+//            $monthlyInterest = '0.05';
+//            $response = [
+//                'capitalAmount' => $capitalAmount,
+//                'feeAmount' => $feeAmount,
+//                'totalFeeAmount' => $totalFeeAmount,
+//                'totalServiceChargeFeeAmount' => $totalServiceChargeFeeAmount,
+//                'totalCouponFeeAmount' => $totalCouponFeeAmount,
+//                'totalFreeFeeCount' => $totalFreeFeeCount,
+//                'creditCouponAmount' => $creditCouponAmount,
+//                'creditCouponPercent' => $creditCouponPercent,
+//                'custLevelDesc' => $custLevelDesc,
+//                'custLevelDiscount' => $custLevelDiscount,
+//                'monthlyInterest' => $monthlyInterest,
+//            ];
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -100,8 +101,8 @@ class LoanHelper extends SmyHelper
     {
         $postField['pageNo'] = $request->get('pageNo', 1);
         try {
-//            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
-            $response = [
+            $response = $this->manage->loanRecords($this->addHeaderPostField($request,$postField));
+            /*$response = [
                 'pageNo' => $postField['pageNo'], //当前页
                 'pageSize' => 10, //页大小
                 'pageCount' => 100, //总共多少页
@@ -123,7 +124,7 @@ class LoanHelper extends SmyHelper
                         'moneylendBankName' => '招商银行',//放款银行
                     ]
                 ] //记录数据
-            ];
+            ];*/
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }
@@ -140,7 +141,8 @@ class LoanHelper extends SmyHelper
     {
         $postField['transSeqNo'] = $request->get('transSeqNo');
         try {
-//            $response = $this->manage->test($this->addHeaderPostField($request,$postField));
+            $response = $this->manage->loansLoaned($this->addHeaderPostField($request,$postField));
+            /*
             $transSeqNo = explode(',', $postField['transSeqNo']);
             $response = [
                 [
@@ -159,7 +161,7 @@ class LoanHelper extends SmyHelper
                     'payTime' => time(),//打款时间
                     'moneylendBankName' => '招商银行',//放款银行
                 ]
-            ];
+            ];*/
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }

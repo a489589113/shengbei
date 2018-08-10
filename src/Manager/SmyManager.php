@@ -25,10 +25,15 @@ class SmyManager
         $this->util = new SDKUtil();
     }
 
-    public function test($postFields)
+    /**
+     * app列表发送
+     *
+     * @param $postFields
+     * @return mixed
+     */
+    public function sendApplist($postFields)
     {
-        return $this->userExisting($postFields);
-//        return $this->userRegister($postFields);
+        return $this->util->post('/bdapi/users/sendApplist', $postFields);
     }
 
 }

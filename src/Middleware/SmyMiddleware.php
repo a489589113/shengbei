@@ -5,6 +5,7 @@ namespace Crius\Smy\Middleware;
 use Closure;
 use Crius\Smy\Helpers\SmyHelper;
 use Crius\Smy\Models\UserOpenId;
+use Illuminate\Support\Facades\Log;
 use StructuredResponse\StructuredResponse;
 
 class SmyMiddleware
@@ -28,9 +29,9 @@ class SmyMiddleware
      */
     public function handle($request, Closure $next)
     {
+        Log::info($request->url());
 //        $openId = $request->header('OpenId');
         $openId = SmyHelper::getOpenId($request);
-
         if (!$openId){
             $this->setResponseRetcode(2011);
             $this->addResponseInfo('OPENID 不能为空');

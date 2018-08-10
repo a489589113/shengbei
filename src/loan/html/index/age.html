@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<meta name="render" content="webkit" />
+<title>开通申请</title>
+<link href="http://10.6.9.244:8056/loan/css/index/age_f6f43975.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap' class="wrap">
+    <template v-if="selectAge">
+        <div class="title">请选择你的身份</div>
+        <div class="ages">
+            <div class="item" @click="link(1)"><p></p>我是工薪族</div>
+            <div class="item" @click="link(0)"><p></p>我是学生</div>
+        </div>
+    </template>
+    <template v-else>
+        <div class="register">
+            <div class="icon"></div>
+            <h3>预约成功</h3>
+            <p>学生产品即将上线</p>
+        </div>
+    </template>
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/index/age_e96e295f.js"></script></body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="render" content="webkit" />
+    <title>未还清借款</title>
+<link href="http://10.6.9.244:8056/loan/css/repayment/unredeemed_0f6078b1.css" rel="stylesheet"></head>
+
+<body>
+<div v-cloak id='wrap'>
+    <div class="page-head">共有{{loanCount}}笔借款未还完</div>
+
+    <div class="repay-info" v-for="item in toRepayList">
+        <div class="info-head">第{{item.id}}笔借款</div>
+        <div class="common-item">
+            <div>未还本金</div>
+            <div class="common-item-m">{{item.capital}}</div>
+            <div>共{{item.instalmentCount}}期</div>
+        </div>
+        <div class="common-item">
+            <div>未还利息</div>
+            <div>{{item.fee}}</div>
+            <div>剩{{item.unRepaymentCount}}期</div>
+        </div>
+        <div class="line-x"></div>
+    </div>
+
+    <div class="page-foot">
+        <div class="foot-line"></div>
+        <div class="page-foot-text">
+            共应还款
+            <span class="total-repay">{{totalToRepay}}</span>元
+            <span class="page-foot-text-s">(本金{{capitalCount}}元+利息{{feeCount}}元)</span>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/repayment/unredeemed_dc752cb4.js"></script></body>
+</html>
