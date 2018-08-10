@@ -18,7 +18,7 @@ class CriusSmyServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->publishes([
             __DIR__ . '/assets' => public_path('vendor/smy'),
-            __DIR__ . '/assets' => public_path('vendor/smy'),
+            __DIR__ . '/loan' => public_path('loan'),
         ],'public');
         $this->publishes([
             __DIR__ . '/config/smyConfig.php' => config_path('smyConfig.php'),
