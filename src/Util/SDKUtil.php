@@ -136,6 +136,7 @@ class SDKUtil
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         }
         $response = json_decode(curl_exec($ch), true);
+        Log::info("省呗接口返回：");
         Log::info($response);
         if (curl_errno($ch)) {
             throw new Exception(curl_error($ch), 0);

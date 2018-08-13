@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
     <meta name="render" content="webkit"/>
     <title>身份认证</title>
-<link href="http://10.6.9.244:8056/loan/css/apply/identity_authentication_c3c94b41.css" rel="stylesheet"></head>
+<link href="http://ebs.cifswalletapp.com/loan/css/apply/identity_authentication_c3c94b41.css" rel="stylesheet"></head>
 
 <body>
 <div v-cloak id='wrap'>
@@ -90,11 +90,11 @@
             <div class="idcard-info-tag">有效期限:</div>
             <div class="idcard-info-name-wrapper">
                 <input v-model="idCard.data.validityDateBegin" class="idcard-info-detail input-date"
-                       @blur="checkValidityDate" placeholder="起始日期"/>
+                       placeholder="起始日期" @click.stop="getDateBegin" readonly/>
                 <div class="vue-item-ico__select"></div>
                 <span style="margin-left: 5px;">至</span>
                 <input v-model="idCard.data.validityDateEnd" class="idcard-info-detail input-date"
-                       @blur="checkValidityDate" placeholder="结束日期"/>
+                       placeholder="结束日期" @click.stop="getDateEnd" readonly/>
                 <div class="vue-item-ico__select"></div>
             </div>
         </div>
@@ -102,5 +102,5 @@
 
     <foot-btn v-on:click.native="next" btn-txt='下一步' :is-on='isValidate'></foot-btn>
 </div>
-<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/identity_authentication_d3e48d41.js"></script></body>
+<script type="text/javascript" src="http://ebs.cifswalletapp.com/loan/js/lib_bac4ba61.js"></script><script type="text/javascript" src="http://ebs.cifswalletapp.com/loan/js/apply/identity_authentication_ef4eabb0.js"></script></body>
 </html>

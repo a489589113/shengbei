@@ -45,6 +45,9 @@ class Config
     private $productName;
     //app类型
     private $appType;
+    //魅族中间键
+    private $meizuMiddleware;
+    private $meizuMiddlewareClass;
 
     public function __construct()
     {
@@ -60,6 +63,8 @@ class Config
         $this->productType = $config["productType"] ?? null;
         $this->productName = $config["productName"] ?? null;
         $this->appType = $config["appType"] ?? null;
+        $this->meizuMiddleware = $config["meizuMiddleware"] ?? null;
+        $this->meizuMiddlewareClass = $config["meizuMiddlewareClass"] ?? null;
     }
 
     public function __set($name, $value)

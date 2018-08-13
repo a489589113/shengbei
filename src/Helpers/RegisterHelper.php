@@ -13,6 +13,7 @@ use Crius\Smy\Manager\SmyManager;
 use Exception;
 use Illuminate\Http\Request;
 use Crius\Smy\Models\UserOpenId;
+use Illuminate\Support\Facades\Log;
 
 class RegisterHelper extends SmyHelper
 {
@@ -162,7 +163,8 @@ class RegisterHelper extends SmyHelper
                 'name' => $request->get('contactName'),
                 'mobilePhoneNo' => $request->get('contactMobilePhoneNo')
             ];
-            $postField['allContactInfo']['fullContactInfoList'] = json_decode($postField['allContactInfo']['fullContactInfoList'], true);
+            $postField['allContactInfo']['fullContactInfoList'] = [];
+            $postField['allContactInfo']['appInfoList'] = [];
             $postField['isSupplement'] = $request->get('isSupplement') ? true : false;
             $response = $this->manage->subContactInfo($this->addHeaderPostField($request, $postField));
 //            $response = null;
@@ -240,11 +242,18 @@ class RegisterHelper extends SmyHelper
         try {
             $postField = $request->only('requestType', 'dynamicCode', 'mobileServerPwd');
             $postField['isSupplement'] = $request->get('isSupplement') ? true : false;
+            if (!isset($postField['requestType'])) {
+                $postField['requestType'] = "";
+            }
+
+//            if ($this->getUser($request) == '18607927085') {
             $response = $this->manage->subPhoneAuth($this->addHeaderPostField($request, $postField));
-//            $response = [
-//                'status' => array_rand(['01', '02', '05', '04', '08'], 1),
-//                'content' => '此处是提示'
-//            ];
+//            } else {
+//                $response = [
+//                    'status' => '01',
+//                    'content' => '此处是提示'
+//                ];
+//            }
         } catch (Exception $exception) {
             return $this->returnResp(false, $exception->getMessage());
         }

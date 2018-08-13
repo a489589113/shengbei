@@ -10,16 +10,23 @@ namespace Crius\Smy\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Crius\Smy\Config\Config;
 use Crius\Smy\Exceptions\ValidateException;
 use Crius\Smy\Middleware\EnableCrossRequestMiddleware;
 use Crius\Smy\Middleware\SmyMiddleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SmyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware([EnableCrossRequestMiddleware::class,SmyMiddleware::class]);
+        $middleware = [EnableCrossRequestMiddleware::class, SmyMiddleware::class];
+        if (Config::getConfig()->meizuMiddleware && class_exists(Config::getConfig()->meizuMiddlewareClass)) {
+            array_push($middleware, Config::getConfig()->meizuMiddlewareClass);
+        }
+        Log::info($middleware);
+        $this->middleware($middleware);
     }
 
     public function validateApi(Request $request, array $rules,
@@ -33,7 +40,8 @@ class SmyController extends Controller
         }
     }
 
-    protected function throwError($error){
+    protected function throwError($error)
+    {
         $exception = new ValidateException();
         $exception->render($error);
         throw $exception;

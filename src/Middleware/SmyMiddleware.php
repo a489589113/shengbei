@@ -33,7 +33,7 @@ class SmyMiddleware
 //        $openId = $request->header('OpenId');
         $openId = SmyHelper::getOpenId($request);
         if (!$openId){
-            $this->setResponseRetcode(2011);
+            $this->setResponseRetcode(0);
             $this->addResponseInfo('OPENID 不能为空');
             die($this->getResponse(TRUE));
         }
@@ -44,7 +44,7 @@ class SmyMiddleware
         $record = UserOpenId::where('openId', $openId)->first();
         $phone = $record->mobilePhoneNo ?? null;
         if (!$phone){
-            $this->setResponseRetcode(2012);
+            $this->setResponseRetcode(0);
             $this->addResponseInfo('用户尚未注册');
             die($this->getResponse(TRUE));
         }

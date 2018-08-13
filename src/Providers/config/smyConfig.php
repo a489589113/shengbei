@@ -31,6 +31,10 @@ return [
     'productName' => 'bbd_android',
     //app类型
     'appType' => 'android',
+
+    'meizuMiddleware' => true,
+
+    'meizuMiddlewareClass' => "Crius\\Meizu\\Middleware\\MeizuMiddleware",
     //app名称
 //   'appName' =>'android',
 ];

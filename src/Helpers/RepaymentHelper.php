@@ -11,6 +11,7 @@ namespace Crius\Smy\Helpers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RepaymentHelper extends SmyHelper
 {
@@ -241,10 +242,32 @@ class RepaymentHelper extends SmyHelper
      */
     public function repayment(Request $request)
     {
-        $postField = $request->only('dynamicCode', 'bankCardID', 'amount', 'repaymentPlans');
+        $postField = $request->only('dynamicCode', 'bankCardID', 'amount');
+        $subPlans = $request->get('repaymentPlans');
         try {
-            $postField['repaymentPlans'] = json_decode($postField['repaymentPlans'], true);
-            $response = $this->manage->repayments($this->addHeaderPostField($request, $postField));
+            $subPlans = json_decode($subPlans, true);
+            $plans = $this->searchPlans($request);
+            if ($plans['retcode'] == 0) {
+                return $plans;
+            }
+            $listData = $plans['data'];
+            if ($listData && $subPlans) {
+                $repaymentPlans = [];
+                foreach ($subPlans as $plan) {
+                    foreach ($listData as $key => $item) {
+                        if ($plan['orderNo'] == $item['orderNo'] && $plan['instalmentCount'] == $item['instalmentCount']) {
+                            array_push($repaymentPlans, $item);
+                        }
+                    }
+                }
+            }
+            if (isset($repaymentPlans) && $repaymentPlans && sizeof($repaymentPlans) == sizeof($subPlans)) {
+                $this->clearResponse();
+                $postField['repaymentPlans'] = $repaymentPlans;
+                $response = $this->manage->repayments($this->addHeaderPostField($request, $postField));
+            } else {
+                return $this->returnResp(false, "无效的还款计划");
+            }
 //            $response = [
 //                'repaySeqNo' => '123456789', //当前页
 //                'repaymentStatus' => array_rand([1, 3], 1), //页大小

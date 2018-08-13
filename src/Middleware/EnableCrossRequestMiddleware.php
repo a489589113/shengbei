@@ -23,9 +23,8 @@ class EnableCrossRequestMiddleware
      */
     public function handle($request, Closure $next)
     {
-        Log::info($request->headers);
         $headers = [
-            'Access-Control-Allow-Origin' => (config('app.crossrequest_allow') ? '*' : null),
+            'Access-Control-Allow-Origin' => (env('CROSSREQUEST_ALLOW', false) ? '*' : null),
             'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token',
             'Access-Control-Allow-Credentials' => 'true'

@@ -12,6 +12,7 @@ use Crius\Smy\Helpers\RegisterHelper;
 use Crius\Smy\Rules\IdNumber;
 use Crius\Smy\Rules\Mobile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends SmyController
 {
@@ -86,10 +87,10 @@ class RegisterController extends SmyController
             'marryStatus' => 'required|in:0,1',
             'contactName' => 'required',
             'contactMobilePhoneNo' => 'required',
-            'fullContactInfoList' => 'required|json',
+//            'fullContactInfoList' => 'required|json',
             'isSupplement' => 'nullable|boolean',
             'haveCreditcard' => 'required|in:0,1',
-            'educationLevel' => 'required|in:1,5,10,15,20,30,40',
+//            'educationLevel' => 'required|in:1,5,10,15,20,30,40',
         ], [], [
             'areaCode' => '地区码',
             'addressDetail' => '住址详情',
@@ -106,8 +107,8 @@ class RegisterController extends SmyController
             'contactMobilePhoneNo' => '常用联系人电话',
             'fullContactInfoList' => '通讯录记录',
             'isSupplement' => '补件',
-            'haveCreditcard' => '学历',
-            'educationLevel' => '是否有信用卡',
+            'haveCreditcard' => '是否有信用卡',
+            'educationLevel' => '学历',
         ]);
         return $this->helper->subContactInfo($request);
     }

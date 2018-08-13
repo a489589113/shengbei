@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
     <meta name="render" content="webkit" />
     <title>填写资料</title>
-<link href="http://10.6.9.244:8056/loan/css/apply/fill_data_7e4fc2c8.css" rel="stylesheet"></head>
+<link href="http://ebs.cifswalletapp.com/loan/css/apply/fill_data_7e4fc2c8.css" rel="stylesheet"></head>
 
 <body>
 <div v-cloak id='wrap'>
@@ -41,12 +41,12 @@
             <div class="line-x"></div>
             <div class="mes">
                 <div class="mes-tit">联系人电话</div>
-                <input class="mes-inp" placeholder="请输入电话"  v-model="biz_content.relative_phone">
+                <input class="mes-inp" placeholder="请输入电话" v-model="biz_content.relative_phone" type="tel" maxlength="11">
             </div>
             <div class="line-x"></div>
             <div class="mes">
                 <div class="mes-tit">电子邮箱</div>
-                <input class="mes-inp" placeholder="请输入电子邮箱" v-model="biz_content.email">
+                <input class="mes-inp" placeholder="请输入电子邮箱" v-model="biz_content.email" type="email">
             </div>
             <div class="line-x"></div>
         </div>
@@ -55,5 +55,5 @@
     <poplist v-on:impress="pop_impress" :show="pop_show" :list="pop_list" :selectindex="selectindex"></poplist>
     <foot-btn v-on:next="next" btn-txt='提交' :is-on='btn_status'></foot-btn>
 </div>
-<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/apply/fill_data_e3597736.js"></script></body>
+<script type="text/javascript" src="http://ebs.cifswalletapp.com/loan/js/lib_bac4ba61.js"></script><script type="text/javascript" src="http://ebs.cifswalletapp.com/loan/js/apply/fill_data_698a6da6.js"></script></body>
 </html>

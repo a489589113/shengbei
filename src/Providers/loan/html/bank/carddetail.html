@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
     <meta name="render" content="webkit" />
     <title>银行卡详情</title>
-<link href="http://10.6.9.244:8056/loan/css/bank/carddetail_1781c221.css" rel="stylesheet"></head>
+<link href="http://ebs.cifswalletapp.com/loan/css/bank/carddetail_6837159d.css" rel="stylesheet"></head>
 
 <body>
 <div v-cloak id='wrap'>
     <div style="padding: 0 8px">
     <div class="detail-container" :style="cardColor">
         <div class="detail">
-            <div class="logo"></div>
+            <div class="logo">
+                <img :src="logoUrl">
+            </div>
             <div class="info">
                 <div class="head-line">
-                    <div>{{bankName}}</div>
+                    <div class="head-line-name">{{bankName}}</div>
                     <div class="auto-repay" v-if="autoRepayment">自动还款</div>
                 </div>
                 <div class="foot-line">
@@ -33,5 +35,5 @@
     </div>
     <foot-btn v-on:next="deleteCard" btn-txt='解除绑定' :is-on='btn_status'></foot-btn>
 </div>
-<script type="text/javascript" src="http://10.6.9.244:8056/loan/js/lib_1b86aa3e.js"></script><script type="text/javascript" src="http://10.6.9.244:8056/loan/js/bank/carddetail_9d6ed4db.js"></script></body>
+<script type="text/javascript" src="http://ebs.cifswalletapp.com/loan/js/lib_bac4ba61.js"></script><script type="text/javascript" src="http://ebs.cifswalletapp.com/loan/js/bank/carddetail_46186fd1.js"></script></body>
 </html>
